@@ -55,6 +55,9 @@
   };
 
   this.togglePassVis = function togglePassVis(bool) {
+    var s = document.styleSheets[0].cssRules[3].style.display;
+    console.log(s);
+    s = bool ? 'block' : 'none';
   };
 }());
 
