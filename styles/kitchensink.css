@@ -1,0 +1,119 @@
+@font-face {
+    font-family: telex;
+    src: url('Telex-Regular.ttf');
+}
+
+@font-face {
+    font-family: oxygen;
+    src: url('Oxygen-Regular.ttf');
+}
+
+body {
+    font-family: telex;
+    color: #222;
+}
+
+#main {
+}
+
+#main p {
+    text-align: justify;
+}
+
+#heading {
+    width: 100%;
+    height: 40px;
+}
+
+#jsTitle { display: none; }
+
+#jsTitle h2 { margin: 0; padding: 0; }
+
+#textRoll {
+    font-family Courier;
+    font-size: 40px;
+    display: none;
+}
+
+#testbutton {
+    font-size: 2em;
+    border: 5px solid #000;
+    padding: 20px;
+}
+
+#resultsOfTests, #cssrules {
+    font-family: oxygen;
+    float: right;
+    padding: 0px;
+    margin: 0px 0px 20px 20px;
+    background: #DDD;
+    text-align: center;
+    width: 300px;
+    border-bottom: 10px solid #888;
+}
+
+#resTitle, #cssTitle {
+    background: #aaa;
+    padding: 10px 0px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 0px 1px 4px #000;
+}
+
+ul#results {
+    list-style-type: none;
+    text-align: left;
+    padding: 0;
+    margin: 10px;
+}
+
+#results li {
+    padding: 5px;
+    margin: 20px 0px;
+    font-weight: bold;
+}
+
+#results li ul {
+    padding: 0;
+}
+
+#results li ul.pass {
+    border-left: solid 20px #3F3;
+}
+
+#results li ul.fail {
+    border-left: solid 20px #F33;
+}
+
+#results li li {
+    margin: 5px;
+    font-size: 1.0em;
+    font-weight: normal;
+}
+
+#results li li.pass {
+    border-left: solid 10px #6F6;
+    list-style: none;
+    background: #CFC;
+}
+
+#results li li.fail {
+    border-left: solid 10px #F66;
+    list-style: none;
+    background: #FCC;
+}
+
+#cssrules {
+    clear: right;
+}
+
+#testForm {
+    margin: 10px 0px;
+}
+
+#testForm input {
+    border: solid 5px #000;
+    padding: 20px;
+    font-size: 2em;
+}
