@@ -187,6 +187,72 @@ console.log(viewer(demoObj));
 // calls counter
 rollInt(4000000);
 
+function sortPractice() {
+  var members = [];
+
+  members.general = ["tableName",
+    "foreignKey",
+    "foreignValue",
+    "security"];
+  members.url = members.general;
+  members.newnotes = members.general;
+  members.factoids = members.general;
+
+  members.general.sort(compareReverseStrings);
+  return members;
+}
+
+sortPractice();
+
+
+// solar system model
+(function () {
+  function Orbit(aphelion, perihelion) {
+    this.aphelion   = typeof aphelion !== 'undefined' ? aphelion : 220;
+    this.perihelion = typeof perihelion !== 'undefined' ? perihelion : 180;
+    this.svg        = paper.ellipse(
+      paper.width / 2,
+      paper.height / 2,
+      this.aphelion * SCALE,
+      this.perihelion * SCALE
+    );
+    this.svg.attr("stroke", "#FFF");
+  }
+
+  function Planet(diameter, orbit) {
+    this.diameter = typeof diameter !== 'undefined' ? diameter : 1;
+    this.orbit = typeof orbit !== 'undefined' ? orbit : new Orbit();
+  }
+
+  function Star(diameter) {
+    this.diameter = typeof diameter !== 'undefined' ? diameter : 1 * SCALE;
+    this.svg      = paper.circle(
+      paper.width / 2,
+      paper.height / 2,
+      this.diameter * SCALE
+    );
+    this.svg.attr("fill", "#FF0");
+  }
+
+  function Belt() {}
+
+  var paper = new Raphael("raphael-svg", 640, 240),
+    SCALE   = 0.6,
+    sun     = new Star(109),
+    mercury = new Planet(),
+    venus   = new Planet(),
+    earth   = new Planet(),
+    mars    = new Planet(),
+    astroid = new Belt(),
+    jupiter = new Planet(),
+    saturn  = new Planet(),
+    uranus  = new Planet(),
+    neptune = new Planet(),
+    kuiper  = new Belt();
+
+  console.log(paper.height);
+}());
+
 // statistics stuff
 (function () {
 
