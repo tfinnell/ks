@@ -13,7 +13,7 @@ body {
     color: #222;
 }
 
-.pass .pass { display: none; }
+.pass .pass { display: block; }
 .fail { display: block; }
 
 #main {
@@ -119,4 +119,8 @@ ul#results {
     border: solid 5px #000;
     padding: 20px;
     font-size: 2em;
+}
+
+#raphael-svg {
+    background: #000;
 }
