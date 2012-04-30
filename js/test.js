@@ -61,7 +61,7 @@
 }());
 
 window.onload = function () {
-  toggleVis(false);
+  toggleVis(true);
   togglePassVis(true);
 
   test("Custom Functions", function () {
@@ -188,6 +188,20 @@ window.onload = function () {
       }
       return testGrade;
     }()), "reverseStringSort(['z', 't', 'd', 'q']) returns ['d', 'q', 't', 'z']");
+    assert((function () {
+      var testGrade,
+        strArr = ["az", "za"],
+        e = ['za', 'az'],
+        s = reverseStringSort(strArr);
+      if (s[0] == e[0] &&
+        s[1] === e[1]) {
+        testGrade = true;
+      } else {
+        testGrade = false;
+      }
+      console.log(s);
+      return testGrade;
+    }()), "reverseStringSort(['za', 'az']) returns ['za', 'az']");
   });
 
   test("HTML Page Structure", function () {
