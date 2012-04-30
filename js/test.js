@@ -55,14 +55,13 @@
   };
 
   this.togglePassVis = function togglePassVis(bool) {
-    var s = document.styleSheets[0].cssRules[3].style.display;
-    console.log(s);
-    s = bool ? 'block' : 'none';
+//    var s = document.styleSheets[0].cssRules[3].style.display;
+//    s = bool ? 'block' : 'none';
   };
 }());
 
 window.onload = function () {
-  toggleVis(true);
+  toggleVis(false);
   togglePassVis(true);
 
   test("Custom Functions", function () {
@@ -137,6 +136,58 @@ window.onload = function () {
       }
       return testGrade;
     }()), "addCommas(1000) returns 1,000");
+    assert((function () {
+      var testGrade;
+      if (reverse('hello') === "olleh") {
+        testGrade = true;
+      } else {
+        testGrade = false;
+      }
+      return testGrade;
+
+    }()), "reverse('hello') returns 'olleh'");
+    assert((function () {
+      var testGrade;
+      if (compareReverseStrings("hi", "hi") === 0) {
+        testGrade = true;
+      } else {
+        testGrade = false;
+      }
+      return testGrade;
+    }()), "compareReverseStrings('hi', 'hi') returns 0");
+    assert((function () {
+      var testGrade;
+      if (compareReverseStrings("b", "a") === 1) {
+        testGrade = true;
+      } else {
+        testGrade = false;
+      }
+      return testGrade;
+    }()), "compareReverseStrings('b', 'a') returns 1");
+    assert((function () {
+      var testGrade;
+      if (compareReverseStrings("a", "b") === -1) {
+        testGrade = true;
+      } else {
+        testGrade = false;
+      }
+      return testGrade;
+    }()), "compareReverseStrings('a', 'b') returns -1");
+    assert((function () {
+      var testGrade,
+        strArr = ["z", "t", "d", "q"],
+        e = ['d', 'q', 't', 'z'],
+        s = reverseStringSort(strArr);
+      if (s[0] == e[0] &&
+        s[1] === e[1] &&
+        s[2] === e[2] &&
+        s[3] === e[3]) {
+        testGrade = true;
+      } else {
+        testGrade = false;
+      }
+      return testGrade;
+    }()), "reverseStringSort(['z', 't', 'd', 'q']) returns ['d', 'q', 't', 'z']");
   });
 
   test("HTML Page Structure", function () {
