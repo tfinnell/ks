@@ -95,6 +95,67 @@ function averageWords(sent) {
   return sum / s.length;
 }
 
+// reverses a string
+function reverse(str) {
+  if (str === undefined) { return "str is undefined"; }
+  var reversedString = '',
+    i;
+  for (i = (str.length - 1); i >= 0; i -= 1) {
+    reversedString += str[i];
+  }
+  return reversedString;
+}
+
+// compares two strings and returns a value that can be used by sort()
+function compareReverseStrings(s1, s2) {
+  var revS1 = reverse(s1),
+    revS2 = reverse(s2),
+    returnValue;
+
+  if (revS1 > revS2) {
+    returnValue = 1;
+  } else if (revS1 < revS2) {
+    returnValue = -1;
+  } else {
+    returnValue = 0;
+  }
+  return returnValue;
+}
+
+// feed it an array, it uses compareReverseStrings() as a callback for sort.
+// reverses the strings in an array and sorts them by their reverse
+function reverseStringSort(sA) {
+  return sA.sort(compareReverseStrings);
+}
+
+// returns a string list of an objects innards
+function viewer(obj) {
+  var names = "",
+    name;
+  for (name in obj) {
+    if (obj.hasOwnProperty(name)) {
+      if (typeof obj[name] === 'object') {
+        names += viewer(obj[name]);
+      } else {
+        names += name + " : " + obj[name] + "\n";
+      }
+    }
+  }
+  return names;
+}
+
+var demoObj = {
+  sup: "hi",
+  blah: "whats this",
+  hihi: 2,
+  dfsdf: {
+    ssdfub: "sub object is this string"
+  },
+  asdfa: "after the subobject"
+};
+
+console.log(viewer(demoObj));
+
 // some textbox validation
 (function () {
   // sets up the text box
