@@ -204,54 +204,93 @@ function sortPractice() {
 
 sortPractice();
 
+function hypoSort(a, b) {
+  return a.hypotenuse - b.hypotenuse;
+}
+
+// Triangles!
+function RightTriangle(b, h) {
+  this.base = b;
+  this.height = h;
+}
+
+RightTriangle.prototype.hypo = function () {
+  this.hypotenuse = Math.sqrt(
+    Math.pow(this.base, 2) + Math.pow(this.height, 2)
+  ).toFixed(2);
+};
+
+RightTriangle.prototype.angles = function () {
+  var adjustment = Math.PI / 180;
+  this.alpha = (Math.atan(this.height / this.base) / adjustment).toFixed(2);
+  this.beta = (90 - this.alpha).toFixed(2);
+};
+
+// using the triangles stuff!
+(function () {
+  var triangles = [],
+    i;
+  triangles[0] = new RightTriangle(6, 6);
+  triangles[1] = new RightTriangle(4, 3);
+  triangles[2] = new RightTriangle(7, 4);
+  triangles[3] = new RightTriangle(6, 7);
+  for (i = 0; i < triangles.length; i += 1) {
+    triangles[i].hypo();
+    triangles[i].angles();
+  }
+  console.log(triangles);
+  triangles.sort(hypoSort);
+  console.log(triangles);
+}());
+
 
 // solar system model
-(function () {
-  function Orbit(aphelion, perihelion) {
-    this.aphelion   = typeof aphelion !== 'undefined' ? aphelion : 220;
-    this.perihelion = typeof perihelion !== 'undefined' ? perihelion : 180;
-    this.svg        = paper.ellipse(
-      paper.width / 2,
-      paper.height / 2,
-      this.aphelion * SCALE,
-      this.perihelion * SCALE
-    );
-    this.svg.attr("stroke", "#FFF");
-  }
-
-  function Planet(diameter, orbit) {
-    this.diameter = typeof diameter !== 'undefined' ? diameter : 1;
-    this.orbit = typeof orbit !== 'undefined' ? orbit : new Orbit();
-  }
-
-  function Star(diameter) {
-    this.diameter = typeof diameter !== 'undefined' ? diameter : 1 * SCALE;
-    this.svg      = paper.circle(
-      paper.width / 2,
-      paper.height / 2,
-      this.diameter * SCALE
-    );
-    this.svg.attr("fill", "#FF0");
-  }
-
-  function Belt() {}
-
-  var paper = new Raphael("raphael-svg", 640, 240),
-    SCALE   = 0.6,
-    sun     = new Star(109),
-    mercury = new Planet(),
-    venus   = new Planet(),
-    earth   = new Planet(),
-    mars    = new Planet(),
-    astroid = new Belt(),
-    jupiter = new Planet(),
-    saturn  = new Planet(),
-    uranus  = new Planet(),
-    neptune = new Planet(),
-    kuiper  = new Belt();
-
-  console.log(paper.height);
-}());
+//(function () {
+//  function Orbit(aphelion, perihelion) {
+//    this.aphelion   = typeof aphelion !== 'undefined' ? aphelion : 220;
+//    this.perihelion = typeof perihelion !== 'undefined' ? perihelion : 180;
+//    this.svg        = paper.ellipse(
+//      paper.width / 2,
+//      paper.height / 2,
+//      this.aphelion * SCALE,
+//      this.perihelion * SCALE
+//    );
+//    this.svg.attr("stroke", "#FFF");
+//  }
+//
+//  function Planet(diameter, orbit) {
+//    this.diameter = typeof diameter !== 'undefined' ? diameter : 1;
+//    this.orbit = typeof orbit !== 'undefined' ? orbit : new Orbit();
+//  }
+//
+//  function Star(diameter) {
+//    this.diameter = typeof diameter !== 'undefined' ? diameter : 1 * SCALE;
+//    this.svg      = paper.circle(
+//      paper.width / 2,
+//      paper.height / 2,
+//      this.diameter * SCALE
+//    );
+//    this.svg.attr("fill", "#FF0");
+//  }
+//
+//  function Belt() {}
+//
+//  var paper = new Raphael("raphael-svg", 640, 240),
+//    SCALE   = 0.1,
+//    sun     = new Star(109),
+//    mercury = new Planet(),
+//    venus   = new Planet(),
+//    earth   = new Planet(),
+//    mars    = new Planet(),
+//    astroid = new Belt(),
+//    jupiter = new Planet(),
+//    saturn  = new Planet(),
+//    uranus  = new Planet(),
+//    neptune = new Planet(),
+//    kuiper  = new Belt();
+//
+//  console.log(paper.height);
+//}());
 
 // statistics stuff
 (function () {
