@@ -205,13 +205,15 @@ function sortPractice() {
 sortPractice();
 
 function hypoSort(a, b) {
-  return a.hypotenuse - b.hypotenuse;
+  return b.hypotenuse - a.hypotenuse;
 }
 
 // Triangles!
 function RightTriangle(b, h) {
   this.base = b;
   this.height = h;
+  this.hypo();
+  this.angles();
 }
 
 RightTriangle.prototype.hypo = function () {
@@ -234,10 +236,6 @@ RightTriangle.prototype.angles = function () {
   triangles[1] = new RightTriangle(4, 3);
   triangles[2] = new RightTriangle(7, 4);
   triangles[3] = new RightTriangle(6, 7);
-  for (i = 0; i < triangles.length; i += 1) {
-    triangles[i].hypo();
-    triangles[i].angles();
-  }
   console.log(triangles);
   triangles.sort(hypoSort);
   console.log(triangles);
