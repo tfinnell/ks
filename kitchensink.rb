@@ -1,5 +1,13 @@
 require 'sinatra'
+require 'json'
+require 'redis'
+
+redis = Redis.new(host: 'localhost', port: 6379)
 
 get '/' do
-  html :kitchensink
+end
+
+get '/triangles' do
+  res = redis.get("triangles")
+  return res == "null" ? "No triangles" : res
 end
