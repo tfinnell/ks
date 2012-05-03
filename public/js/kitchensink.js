@@ -230,17 +230,35 @@ RightTriangle.prototype.angles = function () {
 
 // using the triangles stuff!
 (function () {
-  var triangles = [],
-    i;
-  triangles[0] = new RightTriangle(6, 6);
-  triangles[1] = new RightTriangle(4, 3);
-  triangles[2] = new RightTriangle(7, 4);
-  triangles[3] = new RightTriangle(6, 7);
-  console.log(triangles);
-  triangles.sort(hypoSort);
-  console.log(triangles);
-}());
+  var res = $.ajax('/triangles'),
+    triangles = [];
+  $('#redis-triangles').ajaxComplete(function (e) {
+    var response = JSON.parse(res.responseText),
+      i,
+      b,
+      h;
+    for (i = 0; i < response.length; i += 1) {
+      b = response[i].base;
+      h = response[i].height;
+      triangles.push(new RightTriangle(b, h));
+    }
+    triangles.sort(hypoSort);
+    $(this).append(trianglesTable(triangles));
+  });
 
+  function trianglesTable(triangles) {
+    var i,
+      html = "<tr>";
+    for (i = 0; i < triangles.length; i += 1) {
+      html += "<td>" + (i + 1)                 + "</td>";
+      html += "<td>" + triangles[i].base       + "</td>";
+      html += "<td>" + triangles[i].height     + "</td>";
+      html += "<td>" + triangles[i].hypotenuse + "</td>";
+      html += "</tr>";
+    }
+    return html;
+  }
+}());
 
 // solar system model
 //(function () {
