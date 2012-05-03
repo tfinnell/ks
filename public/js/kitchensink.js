@@ -243,7 +243,7 @@ RightTriangle.prototype.angles = function () {
       triangles.push(new RightTriangle(b, h));
     }
     triangles.sort(hypoSort);
-    $(this).append(trianglesTable(triangles));
+    $(this).children('tbody').append(trianglesTable(triangles));
   });
 
   function trianglesTable(triangles) {
@@ -254,11 +254,82 @@ RightTriangle.prototype.angles = function () {
       html += "<td>" + triangles[i].base       + "</td>";
       html += "<td>" + triangles[i].height     + "</td>";
       html += "<td>" + triangles[i].hypotenuse + "</td>";
+      html += "<td>" + triangles[i].alpha      + "</td>";
+      html += "<td>" + triangles[i].beta       + "</td>";
       html += "</tr>";
     }
     return html;
   }
+
+  function triangleRow(tableObject) {
+  }
 }());
+
+function triangleTable() {
+  var tableHeader = [],
+    tableHtml = "";
+  tableHeader[0] = '<table>';
+  tableHeader[1] = '<tbody>';
+  tableHeader[2] = '<tr><th class="header">Base</th>';
+  tableHeader[3] = '<th class="header">Height</th>';
+  tableHeader[4] = '<th class="header">Hypotenuse</th>';
+  tableHeader[5] = '<th class="header">Alpha</th>';
+  tableHeader[6] = '<th class="header">Beta</th></tr>';
+
+  tableHtml = tableHeader.join("");
+  tableHtml += tableWrapper(tableRowTemplate)
+  return tableHTML;
+}
+
+console.log(triangleTable());
+
+function tableRowTemplate(tableObject) {
+  var html = "",
+    property = "";
+  html = "<tr>";
+  for (property in tableObject) {
+    if (tableObject.hasOwnProperty(property)) {
+      html += '<td class="' + property + '">~' + property + '~</td>';
+    }
+  }
+  html += "</tr>";
+  return html;
+}
+
+function rowWrapper(template, objToWrap) {
+  var pieces = template.split('~'),
+      i = 1,
+      len = pieces.length;
+
+  for (; i < len; i += 2) {
+    pieces[i] = objToWrap[pieces[i]];
+  }
+  return pieces.join("");
+}
+
+function tableWrapper(rowTemplate, arrayOfObjs) {
+  var len = arrayOfObjs.length,
+    html = "",
+    i = 0;
+  for (; i < len; i += 1) {
+    html += rowWrapper(rowTemplate, arrayOfObjs[i]);
+  }
+  return html;
+}
+
+$('#statbutton').click(function () {
+  console.log('first click');
+  $('#statistics').hide();
+  $('#statistics').children().remove();
+  $('#statbutton').html('Show Triangle Table')
+    .unbind("click")
+    .click(function () {
+      console.log('second click');
+      $('#statistics')
+        .html(triangleTable())
+        .show();
+    });
+});
 
 // solar system model
 //(function () {

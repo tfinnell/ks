@@ -4,9 +4,6 @@ require 'redis'
 
 redis = Redis.new(host: 'localhost', port: 6379)
 
-get '/' do
-end
-
 get '/triangles' do
   res = redis.get("triangles")
   return res == "null" ? "No triangles" : res
