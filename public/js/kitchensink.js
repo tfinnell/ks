@@ -260,12 +260,10 @@ RightTriangle.prototype.angles = function () {
     }
     return html;
   }
-
-  function triangleRow(tableObject) {
-  }
 }());
 
-function triangleTable() {
+// in class table template
+function triangleTable(triangles) {
   var tableHeader = [],
     tableHtml = "";
   tableHeader[0] = '<table>';
@@ -277,11 +275,9 @@ function triangleTable() {
   tableHeader[6] = '<th class="header">Beta</th></tr>';
 
   tableHtml = tableHeader.join("");
-  tableHtml += tableWrapper(tableRowTemplate)
-  return tableHTML;
+  tableHtml += tableWrapper(tableRowTemplate, triangles);
+  return tableHtml;
 }
-
-console.log(triangleTable());
 
 function tableRowTemplate(tableObject) {
   var html = "",
@@ -297,11 +293,12 @@ function tableRowTemplate(tableObject) {
 }
 
 function rowWrapper(template, objToWrap) {
-  var pieces = template.split('~'),
-      i = 1,
-      len = pieces.length;
+  var template = template.toString(),
+    pieces = template.split('~'),
+    i,
+    len = pieces.length;
 
-  for (; i < len; i += 2) {
+  for (i = 1; i < len; i += 2) {
     pieces[i] = objToWrap[pieces[i]];
   }
   return pieces.join("");
@@ -310,12 +307,20 @@ function rowWrapper(template, objToWrap) {
 function tableWrapper(rowTemplate, arrayOfObjs) {
   var len = arrayOfObjs.length,
     html = "",
-    i = 0;
-  for (; i < len; i += 1) {
+    i;
+  for (i = 0; i < len; i += 1) {
     html += rowWrapper(rowTemplate, arrayOfObjs[i]);
   }
   return html;
 }
+
+var inClassTriangles = [];
+inClassTriangles[0] = new RightTriangle(2,7);
+inClassTriangles[1] = new RightTriangle(9,5);
+inClassTriangles[2] = new RightTriangle(4,3);
+inClassTriangles[3] = new RightTriangle(6,7);
+inClassTriangles[4] = new RightTriangle(1,5);
+inClassTriangles[5] = new RightTriangle(8,3);
 
 $('#statbutton').click(function () {
   console.log('first click');
@@ -326,58 +331,51 @@ $('#statbutton').click(function () {
     .click(function () {
       console.log('second click');
       $('#statistics')
-        .html(triangleTable())
+        .html(triangleTable(inClassTriangles))
         .show();
     });
 });
 
-// solar system model
-//(function () {
-//  function Orbit(aphelion, perihelion) {
-//    this.aphelion   = typeof aphelion !== 'undefined' ? aphelion : 220;
-//    this.perihelion = typeof perihelion !== 'undefined' ? perihelion : 180;
-//    this.svg        = paper.ellipse(
-//      paper.width / 2,
-//      paper.height / 2,
-//      this.aphelion * SCALE,
-//      this.perihelion * SCALE
-//    );
-//    this.svg.attr("stroke", "#FFF");
-//  }
-//
-//  function Planet(diameter, orbit) {
-//    this.diameter = typeof diameter !== 'undefined' ? diameter : 1;
-//    this.orbit = typeof orbit !== 'undefined' ? orbit : new Orbit();
-//  }
-//
-//  function Star(diameter) {
-//    this.diameter = typeof diameter !== 'undefined' ? diameter : 1 * SCALE;
-//    this.svg      = paper.circle(
-//      paper.width / 2,
-//      paper.height / 2,
-//      this.diameter * SCALE
-//    );
-//    this.svg.attr("fill", "#FF0");
-//  }
-//
-//  function Belt() {}
-//
-//  var paper = new Raphael("raphael-svg", 640, 240),
-//    SCALE   = 0.1,
-//    sun     = new Star(109),
-//    mercury = new Planet(),
-//    venus   = new Planet(),
-//    earth   = new Planet(),
-//    mars    = new Planet(),
-//    astroid = new Belt(),
-//    jupiter = new Planet(),
-//    saturn  = new Planet(),
-//    uranus  = new Planet(),
-//    neptune = new Planet(),
-//    kuiper  = new Belt();
-//
-//  console.log(paper.height);
-//}());
+// planetary system model
+// measurements in KM
+// (function () {
+//   function Orbit(orbit) {
+//     this.aphelion   = orbit.aphelion;
+//     this.perihelion = orbit.perihelion;
+//   }
+// 
+//   function Planet(radius, orbit) {
+//     this.radius = radius;
+//     if (orbit) { this.orbit = new Orbit(orbit); }
+//   }
+// 
+//   function Star(radius) {
+//     this.radius = radius;
+//   }
+// 
+//   function Belt() {}
+// 
+//   var sun   = new Star(695508),
+//     mercury = new Planet(2439.7,
+//       {'aphelion': 69817445, 'perihelion': 46001009}),
+//     venus   = new Planet(6051.8,
+//       {'aphelion': 108942780, 'perihelion': 107476170}),
+//     earth   = new Planet(6371,
+//       {'aphelion': 152098233, 'perihelion': 147098291}),
+//     mars    = new Planet(3389.5,
+//       {'aphelion': 249232432, 'perihelion': 206655215}),
+//     astroid = new Belt(),
+//     jupiter = new Planet(69911,
+//       {'aphelion': 816001807, 'perihelion': 740679835}),
+//     saturn  = new Planet(58232,
+//       {'aphelion': 1503509229, 'perihelion': 1349823615}),
+//     uranus  = new Planet(25362,
+//       {'aphelion': 3006318143, 'perihelion': 2734998229}),
+//     neptune = new Planet(24622,
+//       {'aphelion': 4537039826, 'perihelion': 4459753056}),
+//     kuiper  = new Belt(),
+//     planets = [mercury, venus, earth, mars, jupiter, saturn, uranus, neptune],
+// }());
 
 // statistics stuff
 (function () {
